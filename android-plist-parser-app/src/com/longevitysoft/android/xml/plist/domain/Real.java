@@ -14,11 +14,12 @@ package com.longevitysoft.android.xml.plist.domain;
 
 /**
  * Represents a simple plist real element.
+ * merge https://github.com/TBoehm/android-plist-parser/commit/c45510d861a867b16517cacdf855f3622891080b
  */
-public class Real extends PListObject implements IPListSimpleObject<Float> {
+public class Real extends PListObject implements IPListSimpleObject<Double> {
 
 	// TODO: Double?
-	protected Float real;
+	protected Double real;
 
 	/**
 	 * 
@@ -36,7 +37,7 @@ public class Real extends PListObject implements IPListSimpleObject<Float> {
 	 * com.longevitysoft.android.xml.plist.domain.IPListSimpleObject#getValue()
 	 */
 	@Override
-	public Float getValue() {
+	public Double getValue() {
 		return real;
 	}
 
@@ -48,7 +49,7 @@ public class Real extends PListObject implements IPListSimpleObject<Float> {
 	 * (java.lang.Object)
 	 */
 	@Override
-	public void setValue(Float val) {
+	public void setValue(Double val) {
 		this.real = val;
 	}
 
@@ -61,6 +62,6 @@ public class Real extends PListObject implements IPListSimpleObject<Float> {
 	 */
 	@Override
 	public void setValue(java.lang.String val) {
-		this.real = new Float(Float.parseFloat(val.trim()));
+		this.real = Double.valueOf(val);
 	}
 }

@@ -133,8 +133,10 @@ public abstract class BaseXMLParser {
 			e.printStackTrace();
 		}
 
-		Log.v(stringer.newBuilder().append(TAG).append("#parse").toString(),
-				"done parsing xml");
+		if(Log.isLoggable(TAG, Log.VERBOSE)){
+			Log.v(stringer.newBuilder().append(TAG).append("#parse").toString(),
+					"done parsing xml");
+		}
 	}
 
 }

@@ -407,9 +407,9 @@ public class PListXMLParserTest extends TestCase {
 		PList actualPList = ((PListXMLHandler) parser.getHandler()).getPlist();
 		assertNotNull(actualPList);
 		assertEquals(6, ((Dict) actualPList.getRootElement())
-				.getConfigurationArray("workflow_answers").size());
+				.getArray("workflow_answers").size());
 		assertEquals(3, ((Dict) actualPList.getRootElement())
-				.getConfigurationArray("workflow_tasks").size());
+				.getArray("workflow_tasks").size());
 	}
 
 	/**
@@ -424,15 +424,14 @@ public class PListXMLParserTest extends TestCase {
 		PList actualPList = ((PListXMLHandler) parser.getHandler()).getPlist();
 		assertNotNull(actualPList);
 		Dict cat = (Dict) actualPList.getRootElement();
-		assertEquals("901", cat.getConfiguration("ID").getValue());
-		assertEquals("Title", cat.getConfiguration("title").getValue());
-		assertEquals(new Integer(152), cat.getConfigurationInteger("thumb.ID")
+		assertEquals("901", cat.getString("ID"));
+		assertEquals("Title", cat.getString("title"));
+		assertEquals(new Integer(152), cat.getInteger("thumb.ID")
 				.getValue());
-		assertEquals("http://www.google.com", cat.getConfiguration("thumb.uri")
+		assertEquals("http://www.google.com", cat.getString("thumb.uri"));
+		assertEquals(new Integer(2), cat.getInteger("order")
 				.getValue());
-		assertEquals(new Integer(2), cat.getConfigurationInteger("order")
-				.getValue());
-		assertEquals(new Integer(5), cat.getConfigurationInteger("type")
+		assertEquals(new Integer(5), cat.getInteger("type")
 				.getValue());
 	}
 
@@ -511,8 +510,7 @@ public class PListXMLParserTest extends TestCase {
 		parser.parse(VALID_PLIST_ISO8601_DATE_ROOT);
 		PList actualPList = ((PListXMLHandler) parser.getHandler()).getPlist();
 		assertNotNull(actualPList);
-		// 2012-02-24T10:10:00Z
-		assertEquals(new Date("Fri, 24 Feb 2012 10:10:00 GMT-0700"),
+		assertEquals(new Date("Fri Feb 24 10:10:00 GMT 2012"),
 				((com.longevitysoft.android.xml.plist.domain.Date) actualPList
 						.getRootElement()).getValue());
 	}

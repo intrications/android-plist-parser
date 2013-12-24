@@ -22,8 +22,15 @@ import java.util.TreeMap;
  * Represents a PList Dict object.
  * 
  * @author fbeachler
+ * 
+ * merge https://github.com/TBoehm/android-plist-parser/commit/2e992415d79ee4cb213a7bf82e9daa1d81d02ba2
  */
 public class Dict extends PListObject {
+	
+	private static final String EMPTY_STRING = new String();
+	private static final Integer EMPTY_INTEGER = new Integer();
+	private static final Real EMPTY_REAL = new Real();
+	
 
 	/**
 	 * 
@@ -81,7 +88,7 @@ public class Dict extends PListObject {
 	 *         key does not exist.
 	 */
 	@SuppressWarnings("unchecked")
-	public <E extends PListObject> E getConfigurationObject(java.lang.String key) {
+	public <E extends PListObject> E getPlistObject(java.lang.String key) {
 		StringTokenizer st = new StringTokenizer(key, DOT);
 
 		if (st.hasMoreTokens()) {
@@ -108,28 +115,43 @@ public class Dict extends PListObject {
 	 *            dictionary.
 	 * @return The String value of the specified key.
 	 */
-	public String getConfiguration(java.lang.String key) {
-		return (String) getConfigurationObject(key);
+	public String getString(java.lang.String key) {
+			String value = (String) getPlistObject(key);
+			if (value == null) {
+				return EMPTY_STRING;
+			}
+		return value;
 	}
 
 	/**
-	 * Get a String configuration value for the given key. If there is no value
-	 * for the given key, then return the default value.
+	 * Get an Integer configuration value for the given key.
 	 * 
 	 * @param key
 	 *            The text of the key to look up in the configuration
 	 *            dictionary.
-	 * @param defaultValue
-	 *            The default value to return if they key has no associated
-	 *            value.
-	 * @return The String value of the specified key, or defaultValue if the
-	 *         value for keyName is null.
+	 * @return The Integer value of the specified key.
 	 */
-	public String getConfigurationWithDefault(java.lang.String key,
-			String defaultValue) {
-		String value = getConfiguration(key);
+	public Integer getInteger(java.lang.String key) {
+		Integer value = (Integer) getPlistObject(key);
 		if (value == null) {
-			return defaultValue;
+			return EMPTY_INTEGER;
+		}
+
+		return value;
+	}
+	
+	/**
+	 * Get a Real configuration value for the given key.
+	 * 
+	 * @param key
+	 *            The text of the key to look up in the configuration
+	 *            dictionary.
+	 * @return The Real value of the specified key.
+	 */
+	public Real getReal(java.lang.String key) {
+		Real value = (Real) getPlistObject(key);
+		if (value == null) {
+			return EMPTY_REAL;
 		}
 
 		return value;
@@ -143,43 +165,8 @@ public class Dict extends PListObject {
 	 *            dictionary.
 	 * @return The Integer value of the specified key.
 	 */
-	public Integer getConfigurationInteger(java.lang.String key) {
-		return (Integer) getConfigurationObject(key);
-	}
-
-	/**
-	 * Get an Integer configuration value for the given key. If there is no
-	 * value for the given key, then return the default value.
-	 * 
-	 * @param key
-	 *            The text of the key to look up in the configuration
-	 *            dictionary.
-	 * @param defaultValue
-	 *            The default value to return if they key has no associated
-	 *            value.
-	 * @return The Integer value of the specified key, or defaultValue if the
-	 *         value for keyName is null.
-	 */
-	public Integer getConfigurationIntegerWithDefault(java.lang.String key,
-			Integer defaultValue) {
-		Integer value = getConfigurationInteger(key);
-		if (value == null) {
-			return defaultValue;
-		}
-
-		return value;
-	}
-
-	/**
-	 * Get an Integer configuration value for the given key.
-	 * 
-	 * @param key
-	 *            The text of the key to look up in the configuration
-	 *            dictionary.
-	 * @return The Integer value of the specified key.
-	 */
-	public Array getConfigurationArray(java.lang.String key) {
-		return (Array) getConfigurationObject(key);
+	public Array getArray(java.lang.String key) {
+		return (Array) getPlistObject(key);
 	}
 
 	/*

@@ -92,12 +92,14 @@ public class PList {
 	 */
 	private void attachPListObjToDictParent(PListObject obj,
 			java.lang.String key) {
-		Log.v(stringer.newBuilder().append(TAG)
-				.append("#attachPListObjToDictParent").toString(),
-				stringer.newBuilder().append("key|obj-type|obj: ").append(key)
-						.append(Constants.PIPE).append(obj.getType())
-						.append(Constants.PIPE).append(obj.toString())
-						.append(Constants.PIPE).toString());
+		if(Log.isLoggable(TAG, Log.VERBOSE)){
+			Log.v(stringer.newBuilder().append(TAG)
+					.append("#attachPListObjToDictParent").toString(),
+					stringer.newBuilder().append("key|obj-type|obj: ").append(key)
+							.append(Constants.PIPE).append(obj.getType())
+							.append(Constants.PIPE).append(obj.toString())
+							.append(Constants.PIPE).toString());
+		}
 		Dict parent = (Dict) stack.pop();
 		parent.putConfig(key, obj);
 		stack.push(parent);
@@ -110,12 +112,14 @@ public class PList {
 	 */
 	private void attachPListObjToArrayParent(Stack<PListObject> stack,
 			PListObject obj) {
-		Log.v(stringer.newBuilder().append(TAG)
-				.append("#attachPListObjToArrayParent").toString(),
-				stringer.newBuilder().append("obj-type|obj: ")
-						.append(Constants.PIPE).append(obj.getType())
-						.append(Constants.PIPE).append(obj.toString())
-						.append(Constants.PIPE).toString());
+		if(Log.isLoggable(TAG, Log.VERBOSE)){
+			Log.v(stringer.newBuilder().append(TAG)
+					.append("#attachPListObjToArrayParent").toString(),
+					stringer.newBuilder().append("obj-type|obj: ")
+							.append(Constants.PIPE).append(obj.getType())
+							.append(Constants.PIPE).append(obj.toString())
+							.append(Constants.PIPE).toString());
+		}
 		Array parent = (Array) stack.pop();
 		parent.add(obj);
 		stack.push(parent);

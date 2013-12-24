@@ -18,7 +18,7 @@ package com.longevitysoft.android.xml.plist.domain;
 public class Integer extends PListObject implements
 		IPListSimpleObject<java.lang.Integer> {
 
-	protected java.lang.Integer intgr;
+	protected java.lang.Integer intgr = 0;
 
 	/**
 	 * 

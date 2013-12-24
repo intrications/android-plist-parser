@@ -155,13 +155,15 @@ public class PListXMLHandler extends DefaultHandler2 {
 	@Override
 	public void startElement(java.lang.String uri, java.lang.String localName,
 			java.lang.String qName, Attributes attributes) throws SAXException {
-		Log.v(stringer.newBuilder().append(TAG).append("#startElement")
-				.toString(),
-				stringer.newBuilder()
-						.append("Start Element lname|uri|attr.length :")
-						.append(localName).append(Constants.PIPE).append(uri)
-						.append(Constants.PIPE).append(attributes.getLength())
-						.toString());
+		if(Log.isLoggable(TAG, Log.VERBOSE)){
+			Log.v(stringer.newBuilder().append(TAG).append("#startElement")
+					.toString(),
+					stringer.newBuilder()
+							.append("Start Element lname|uri|attr.length :")
+							.append(localName).append(Constants.PIPE).append(uri)
+							.append(Constants.PIPE).append(attributes.getLength())
+							.toString());
+		}
 		tempVal.newBuilder();
 		if (localName.equalsIgnoreCase(Constants.TAG_PLIST)) {
 			if (null != pList) {
@@ -196,11 +198,13 @@ public class PListXMLHandler extends DefaultHandler2 {
 	@Override
 	public void characters(char[] ch, int start, int length)
 			throws SAXException {
-		Log.v(stringer.newBuilder().append(TAG).append("#characters")
-				.toString(),
-				stringer.newBuilder().append(ch).append(Constants.PIPE)
-						.append(start).append(Constants.PIPE).append(length)
-						.append(Constants.PIPE).toString());
+		if(Log.isLoggable(TAG, Log.VERBOSE)){
+			Log.v(stringer.newBuilder().append(TAG).append("#characters")
+					.toString(),
+					stringer.newBuilder().append(ch).append(Constants.PIPE)
+							.append(start).append(Constants.PIPE).append(length)
+							.append(Constants.PIPE).toString());
+		}
 		tempVal.getBuilder().append(new java.lang.String(ch, start, length));
 	}
 
@@ -213,13 +217,15 @@ public class PListXMLHandler extends DefaultHandler2 {
 	@Override
 	public void endElement(java.lang.String uri, java.lang.String localName,
 			java.lang.String qName) throws SAXException {
-		Log.v(stringer.newBuilder().append(TAG).append("#endElement")
-				.toString(),
-				stringer.newBuilder().append("localName|qName|uri|tempVal: ")
-						.append(localName).append(Constants.PIPE).append(qName)
-						.append(Constants.PIPE).append(uri)
-						.append(Constants.PIPE)
-						.append(tempVal.getBuilder().toString()).toString());
+		if(Log.isLoggable(TAG, Log.VERBOSE)){
+			Log.v(stringer.newBuilder().append(TAG).append("#endElement")
+					.toString(),
+					stringer.newBuilder().append("localName|qName|uri|tempVal: ")
+					.append(localName).append(Constants.PIPE).append(qName)
+					.append(Constants.PIPE).append(uri)
+					.append(Constants.PIPE)
+					.append(tempVal.getBuilder().toString()).toString());
+		}
 		if (localName.equalsIgnoreCase(Constants.TAG_KEY)) {
 			key = tempVal.getBuilder().toString().trim();
 		} else if (localName.equalsIgnoreCase(Constants.TAG_DICT) || 
