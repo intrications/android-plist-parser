@@ -89,4 +89,11 @@
     <!-- version-tag: 1 -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
 
+<target name="jar" depends="debug">
+    <jar
+        destfile="bin/android-plist-parser-app.jar"
+        basedir="bin/classes"
+    />
+</target>
+
 </project>
